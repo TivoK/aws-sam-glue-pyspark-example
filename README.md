@@ -16,7 +16,7 @@ git clone https://github.com/TivoK/aws-sam-glue-pyspark-example.git
 ```
 
 # CLI Commands
-Below are the CLI Used in this tutorial for reference.
+Below are the SAM and AWS CLI commands used in this tutorial for reference.
 
 ```
 ###create sam app
