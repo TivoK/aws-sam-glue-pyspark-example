@@ -8,10 +8,8 @@ AWS SAM (ServerLess Application Manager) is an AWS open-source Framework that al
 
 # Tutorial
 
-In this tutorial we will be leveraging an example AWS Glue PySpark Job  that I created. The Project is hosted in the link below:
-
-GitHub - TivoK/aws-sam-glue-pyspark-example: This project is an illustrative guide on how to create an AWS Glue ETL Pyspark job. 
-
+In this tutorial we will be leveraging this example AWS Glue PySpark Job. This project assumes
+you have an AWS Account w/ valid permissions and AWS Configured locally on your machine.
 
 ```
 git clone https://github.com/TivoK/aws-sam-glue-pyspark-example.git
