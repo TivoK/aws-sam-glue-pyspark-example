@@ -14,7 +14,7 @@ you have an AWS Account w/ valid permissions and AWS Configured locally on your 
 ```
 git clone https://github.com/TivoK/aws-sam-glue-pyspark-example.git
 ```
-The project consists of creating an AWS Glue Job with the work depicted down below.
+The project consists of creating an AWS Glue Job with the depicted workflow down below.
 
 ![](https://my-vids-projects-demos.s3.amazonaws.com/glueworkflow.PNG)
 
