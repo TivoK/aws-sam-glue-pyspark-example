@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Example PySpark AWS Glue Job w/ AWS SAM
+
+Resources:
+  MySourceBucket:
+    Type: "AWS::S3::Bucket"
+    Properties: 
+      BucketName: "example-source-glue-pyspark-demo"
+  
+  MyTargetBucket:
+    Type: "AWS::S3::Bucket"
+    Properties: 
+      BucketName: "example-target-glue-pyspark-demo"
+
+  ExampleSAMGlueRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: "ExampleSAMGlueRoleName"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "glue.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        -
+          PolicyName: "ExampleSAMGluePolicy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              -
+                Effect: "Allow"
+                Action: "s3:*Object"
+                Resource: 
+                  - !Sub "arn:aws:s3:::${MySourceBucket}/*"
+                  - !Sub "arn:aws:s3:::${MyTargetBucket}/*"
+              - 
+                Effect: "Allow"
+                Action: "s3:ListBucket"
+                Resource:
+                  - !Sub  "arn:aws:s3:::${MySourceBucket}"
+                  - !Sub  "arn:aws:s3:::${MyTargetBucket}"
+              - 
+                Effect: "Allow"
+                Action: "*"
+                Resource:
+                  - "arn:aws:s3:::aws-sam-cli-managed-default*" # this is the default bucket where sam cli stores your code/templates
+
+
+  ExampleSAMGlueJobETL:
+    Type: "AWS::Glue::Job"
+    Properties: 
+      Command: 
+          Name: "glueetl" #for Spark jobs name must be glueetl per docs
+          ScriptLocation: ./glue-script/example-pyspark-glueetl.py #Reference to the file we are uploading
+      Description: "Performs an ETL Job on Source Bucket w/ Time Stamps"
+      GlueVersion: "3.0"
+      MaxCapacity: 10
+      MaxRetries: 0
+      Name: "ExampleDemoGlueJobETL"
+      Role: !Ref ExampleSAMGlueRole
+      Timeout: 3
+
+
+
+
