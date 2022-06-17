@@ -10,7 +10,7 @@
 > aws --profile my-profile  s3 cp ./data s3://example-source-glue-pyspark-demo --recursive
 
 ### Run The Glue Job
-- SYNTAX:```aws glue --profile {your profile name} start-job-run --job-name  {glue job name}``
+- SYNTAX:```aws glue --profile {your profile name} start-job-run --job-name  {glue job name}```
 > aws glue --profile my-profile start-job-run --job-name  ExampleDemoGlueJobETL
 
 ### Delete Stack
